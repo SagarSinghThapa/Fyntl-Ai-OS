@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Global Colors */
+    --global-bg-1: #1100ac;
+    --global-bg-2: #d9d9d9;
+    --global-bg-3: #dde5ff;
+    --global-bg-4: #ddf1e6;
+    --global-bg-5: #dee5ff;
+    --global-bg-6: #ebdffa;
+    --global-bg-7: #f5f1fb;
+    --global-bg-8: #f7f3fe;
+    --global-bg-9: #ffffff;
+    
+    --global-text-1: #1100ac;
+    --global-text-2: #1d0000;
+    --global-text-3: #7B61FF;
+    --global-text-4: #320404;
+    --global-text-5: #6a6969;
+    --global-text-6: #bd1d1d;
+    --global-text-7: #cacbcc;
+    --global-text-8: #ffffff;
+
+    /* Header Colors */
+    --header-bg-1: #2252cd;
+    --header-text-1: #ffffff;
+
+    /* Button Colors */
+    --button-bg-1: #e6007b;
+  }
+}
+
+@layer utilities {
+  /* Global Background */
+  .bg-global-1 { background-color: var(--global-bg-1); }
+  .bg-global-2 { background-color: var(--global-bg-2); }
+  .bg-global-3 { background-color: var(--global-bg-3); }
+  .bg-global-4 { background-color: var(--global-bg-4); }
+  .bg-global-5 { background-color: var(--global-bg-5); }
+  .bg-global-6 { background-color: var(--global-bg-6); }
+  .bg-global-7 { background-color: var(--global-bg-7); }
+  .bg-global-8 { background-color: var(--global-bg-8); }
+  .bg-global-9 { background-color: var(--global-bg-9); }
+
+  /* Global Text */
+  .text-global-1 { color: var(--global-text-1); }
+  .text-global-2 { color: var(--global-text-2); }
+  .text-global-3 { color: var(--global-text-3); }
+  .text-global-4 { color: var(--global-text-4); }
+  .text-global-5 { color: var(--global-text-5); }
+  .text-global-6 { color: var(--global-text-6); }
+  .text-global-7 { color: var(--global-text-7); }
+  .text-global-8 { color: var(--global-text-8); }
+
+  /* Header */
+  .bg-header-1 { background-color: var(--header-bg-1); }
+  .text-header-1 { color: var(--header-text-1); }
+
+  /* Button */
+  .bg-button-1 { background-color: var(--button-bg-1); }
+
+  /* Responsive Utilities */
+  .responsive-container {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 640px) {
+    .responsive-container {
+      max-width: 640px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .responsive-container {
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .responsive-container {
+      max-width: 1024px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .responsive-container {
+      max-width: 1280px;
+    }
+  }
+}
+
+/* Responsive Typography */
+@responsive {
+  .text-responsive-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  .text-responsive-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .text-responsive-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .text-responsive-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .text-responsive-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .text-responsive-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .text-responsive-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .text-responsive-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
