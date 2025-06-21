@@ -39,11 +39,11 @@ const Home = () => {
       {/* Main Content */}
       <div className="flex flex-col md:flex-row w-full px-4 md:px-8 py-8 md:py-16 justify-center">
         {/* Left Section - Hero Content */}
-        <div className="flex flex-col w-full md:w-[416px] md:mr-16 mb-8 md:mb-0">
+        <div className="w-[416px] h-[462px] flex flex-col w-full md:w-[416px] md:mr-16 mb-8 md:mb-0">
           {/* Hero Title */}
           <div className="mb-8">
             <h1 className="text-[32px] md:text-[52px] font-satoshi font-black leading-[1.2] md:leading-[70px] text-left mb-4">
-              <span className="bg-gradient-to-r from-global-3 via-purple-400 to-global-3 bg-clip-text text-transparent">
+              <span className="bg-[linear-gradient(90deg,#2252CD_0%,#C66AFB_50%,#2252CD_100%)] bg-clip-text text-transparent font-satoshi text-[40px] md:text-[64px] font-bold leading-[1.2]">
                 Business OS
               </span>
               <br />
@@ -74,107 +74,85 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Right Section - Dashboard Preview */}
-        <div className="flex flex-col relative w-full md:w-[907px]">
+{/* Right Section - Dashboard */}
+<div className="relative w-full max-w-[742px]">
           {/* Realtime Analytics Badge */}
-          <div className="absolute top-0 right-0 z-10 flex flex-row items-center bg-global-9 border border-gray-300 rounded-[19px] px-3 py-1 md:px-4 md:py-2">
-            <div className="w-[8px] h-[8px] md:w-[10px] md:h-[10px] bg-global-1 rounded-[5px] mr-2 md:mr-3"></div>
-            <span className="text-[14px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[25px] text-global-5">
-              Realtime Analytics
-            </span>
+          <div className="absolute top-0 right-0 z-10 bg-global-9 border border-gray-300 rounded-[19px] px-4 py-2 flex items-center">
+            <div className="bg-global-1 rounded-[5px] w-[10px] h-[10px] mr-3"></div>
+            <span className="text-[18px] font-satoshi font-medium text-global-5">Realtime Analytics</span>
           </div>
 
-          {/* Main Dashboard */}
-          <div className="bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 rounded-t-[20px] p-4 md:p-6 mb-0">
-            <div className="flex flex-row items-center justify-between mb-4 md:mb-6">
-              <div className="flex flex-row items-center">
-                <div className="w-[32px] h-[36px] md:w-[42px] md:h-[48px] bg-global-1 rounded-[10px] flex items-center justify-center mr-3 md:mr-4">
-                  <img 
-                    src="/images/img_vector_white_a700.svg" 
-                    alt="Fyntl AI"
-                    className="w-[15px] h-[14px] md:w-[19px] md:h-[18px]"
-                  />
+          {/* Fyntl Header */}
+          <div className="w-full max-w-[742px] h-[79px] bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 rounded-t-[20px] p-4 md:p-6 shadow-lg">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="w-[32px] h-[36px] md:w-[42px] md:h-[48px] bg-global-1 rounded-[10px] flex items-center justify-center mr-3">
+                  <img src="/images/img_vector_white_a700.svg" alt="Fyntl AI" className="w-[15px] h-[15px]" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[14px] md:text-[18px] font-satoshi font-bold leading-[1.4] md:leading-[25px] text-global-4">
-                    Fyntl AI
-                  </span>
-                  <span className="text-[14px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[25px] text-global-5">
-                    Amaze Corp
-                  </span>
+                  <span className="text-[14px] md:text-[18px] font-bold text-global-4">Fyntl AI</span>
+                  <span className="text-[14px] md:text-[18px] font-medium text-global-5">Amaze Corp</span>
                 </div>
               </div>
-              <div className="flex flex-row items-center space-x-2 md:space-x-4">
-                <div className="w-[35px] h-[35px] md:w-[45px] md:h-[45px] bg-global-5 border border-gray-400 rounded-[22px] flex items-center justify-center">
-                  <span className="text-[14px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[25px] text-global-1">
-                    JD
-                  </span>
+              <div className="flex items-center space-x-2">
+                <div className="w-[35px] h-[35px] bg-global-5 border border-gray-400 rounded-full flex items-center justify-center">
+                  <span className="text-[14px] font-medium text-global-1">JD</span>
                 </div>
-                <img 
-                  src="/images/img_tablerdots.svg" 
-                  alt="More options"
-                  className="w-5 h-5 md:w-6 md:h-6"
-                />
+                <img src="/images/img_tablerdots.svg" alt="Menu" className="w-5 h-5" />
               </div>
             </div>
           </div>
 
-          {/* Dashboard Content */}
-          <div className="bg-global-9 rounded-b-[20px] p-4 md:p-6 flex flex-col md:flex-row justify-between">
-            {/* Business Performance */}
-            <div className="flex flex-col mb-4 md:mb-0">
-              <h3 className="text-[16px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[25px] text-global-2 mb-2">
-                Business Performance
-              </h3>
-              <span className="text-[16px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[25px] text-global-5">
-                May 30, 2025
-              </span>
-            </div>
-
-            {/* Business Co-pilot */}
-            <div className="bg-global-9 border border-global-3 rounded-[10px] p-4 md:p-6 w-full md:w-[377px] shadow-lg">
-              <div className="flex flex-row items-center mb-4 md:mb-6">
-                <div className="w-[24px] h-[24px] md:w-[30px] md:h-[30px] bg-global-1 rounded-[15px] flex items-center justify-center mr-2 md:mr-3">
-                  <img 
-                    src="/images/img_vector_white_a700.svg" 
-                    alt="Business Co-pilot"
-                    className="w-[15px] h-[15px] md:w-[19px] md:h-[18px]"
-                  />
-                </div>
-                <span className="text-[16px] md:text-[18px] font-satoshi font-bold leading-[1.4] md:leading-[25px] text-global-4">
-                  Business Co-pilot
+          {/* Dashboard Body */}
+          <div className="w-full max-w-[742px] bg-white rounded-b-[20px] shadow-md p-6 mt-[-1px]">
+            <div className="flex flex-col md:flex-row justify-between items-start">
+              {/* Business Performance */}
+              <div className="mb-6 md:mb-0">
+                <h3 className="text-[16px] md:text-[18px] font-medium text-global-2 mb-2">
+                  Business Performance
+                </h3>
+                <span className="text-[16px] md:text-[18px] font-medium text-global-5">
+                  May 30, 2025
                 </span>
               </div>
-              
-              <p className="text-[14px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[24px] text-global-5 mb-4 md:mb-6">
-                What 1% of our total revenue comes from international invoices?
-              </p>
-              
-              {isBusinessCopilotExpanded && (
-                <div className="bg-global-7 rounded-[10px] p-3 md:p-4">
-                  <p className="text-[14px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[24px] text-global-5">
-                    Total revenue percentage that comes<br className="hidden md:block" />
-                    from international invoices is 8.15%.<br />
-                    Total Revenue : $542,543<br />
-                    International<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Revenue : $345,345.56(8.15%)
-                  </p>
+
+              {/* Business Co-pilot */}
+              <div className="w-full md:w-[377px] bg-global-9 border border-global-3 rounded-[10px] p-5 shadow-md">
+                <div className="flex items-center mb-5">
+                  <div className="w-[30px] h-[30px] bg-global-1 rounded-full flex items-center justify-center mr-3">
+                    <img src="/images/img_vector_white_a700.svg" alt="Business Co-pilot" className="w-[15px]" />
+                  </div>
+                  <span className="text-[16px] md:text-[18px] font-bold text-global-4">Business Co-pilot</span>
                 </div>
-              )}
+
+                <p className="text-[14px] md:text-[18px] font-medium text-global-5 mb-4">
+                  What 1% of our total revenue comes from international invoices?
+                </p>
+
+                {isBusinessCopilotExpanded && (
+                  <div className="bg-global-7 rounded-[10px] p-4">
+                    <p className="text-[14px] md:text-[18px] font-medium text-global-5 leading-[1.5]">
+                      Total revenue percentage that comes from international invoices is 8.15%.<br />
+                      Total Revenue: $542,543<br />
+                      International Revenue: $345,345.56 (8.15%)
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Financial Cards */}
-          <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mt-4 md:mt-6">
+          <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-[20px] -mt-12 z-20">
             {/* Financials Card */}
-            <div className="bg-global-9 border border-gray-200 rounded-[10px] p-4 md:p-6 w-full md:w-[406px] shadow-sm">
-              <div className="flex flex-row items-center justify-between mb-4 md:mb-6">
-                <span className="text-[16px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[25px] text-global-4">
+            <div className="bg-global-9 border border-gray-200 rounded-[10px] px-5 py-6 w-full md:w-[406px] md:h-[130px] shadow-sm flex flex-col justify-between">
+              <div className="flex items-center gap-[6px] mb-[12px]">
+                <span className="text-[16px] md:text-[18px] font-satoshi font-medium text-global-4 leading-[24px]">
                   Financials
                 </span>
                 <div className="flex flex-row items-center space-x-2 md:space-x-4">
-                  <div className="w-[18px] h-[20px] md:w-[20px] md:h-[22px] border-2 border-global-7 rounded-[10px] flex items-center justify-center">
-                    <span className="text-[14px] md:text-[16px] font-satoshi font-bold leading-[1.4] md:leading-[22px] text-global-7">
+                  <div className="w-[20px] h-[22px] border-2 border-global-7 rounded-[10px] flex items-center justify-center">
+                    <span className="text-[14px] md:text-[16px] font-satoshi font-bold text-global-7 leading-[22px]">
                       i
                     </span>
                   </div>
@@ -186,17 +164,17 @@ const Home = () => {
                 </div>
               </div>
               
-              <div className="flex flex-row items-center">
+              <div className="flex items-center gap-[11px] w-[185px] h-[60px]">
                 <img 
                   src="/images/img_frame_1116606801.svg" 
                   alt="Financial chart"
-                  className="w-[50px] h-[50px] md:w-[60px] md:h-[60px] mr-3 md:mr-4"
+                  className="w-[40px] h-[40px] md:w-[48px] md:h-[48px]"
                 />
-                <div className="flex flex-col">
-                  <span className="text-[16px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[25px] text-global-4 mb-1">
+                <div className="flex flex-col justify-center">
+                  <span className="text-[16px] md:text-[18px] font-satoshi font-medium text-global-4 leading-[1.4]">
                     $234,567.87
                   </span>
-                  <span className="text-[16px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[25px] text-global-5">
+                  <span className="text-[14px] md:text-[16px] font-satoshi font-medium text-global-5 leading-[1.4]">
                     Net Income
                   </span>
                 </div>
@@ -204,9 +182,9 @@ const Home = () => {
             </div>
 
             {/* Sales Card */}
-            <div className="bg-global-9 border border-gray-200 rounded-[10px] p-4 md:p-6 w-full md:w-[406px] shadow-sm">
-              <div className="flex flex-row items-center justify-between mb-4 md:mb-6">
-                <div className="flex flex-row items-center space-x-2 md:space-x-4">
+            <div className="bg-global-9 border border-gray-200 rounded-[10px] px-[30px] py-[10px] w-full md:w-[406px] md:h-[131px] shadow-sm flex flex-col justify-between">
+              <div className="flex flex-row items-center justify-between mb-[20px]">
+                <div className="flex flex-row items-center gap-[6px]">
                   <span className="text-[16px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[25px] text-global-4">
                     Sales
                   </span>
@@ -230,17 +208,17 @@ const Home = () => {
                 </div>
               </div>
               
-              <div className="flex flex-row items-center">
+              <div className="flex flex-row items-center w-[240px] h-[60px] p-0 gap-[11px]">
                 <img 
                   src="/images/img_frame_1116606801_blue_50.svg" 
                   alt="Sales chart"
-                  className="w-[50px] h-[50px] md:w-[60px] md:h-[60px] mr-3 md:mr-4"
+                  className="w-[50px] h-[50px] md:w-[60px] md:h-[60px]"
                 />
-                <div className="flex flex-col">
-                  <span className="text-[16px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[25px] text-global-4 mb-1">
+                <div className="flex flex-col justify-center">
+                  <span className="text-[16px] md:text-[18px] font-satoshi font-medium leading-[1.4] text-global-4 mb-[2px]">
                     848
                   </span>
-                  <span className="text-[16px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[25px] text-global-5">
+                  <span className="text-[16px] md:text-[18px] font-satoshi font-medium leading-[1.4] text-global-5">
                     Projected Revenue
                   </span>
                 </div>
@@ -272,7 +250,7 @@ const Home = () => {
       <div className="flex flex-col items-center px-4 md:px-8 mb-8 md:mb-16">
         <h2 className="text-[32px] md:text-[52px] font-satoshi font-black leading-[1.2] md:leading-[71px] text-center mb-4">
           <span className="text-global-2">Introducing </span>
-          <span className="bg-gradient-to-r from-global-3 via-purple-400 to-global-3 bg-clip-text text-transparent">
+          <span className="bg-[linear-gradient(90deg,#2252CD_0%,#C66AFB_50%,#2252CD_100%)] bg-clip-text text-transparent font-satoshi text-[40px] md:text-[64px] font-bold leading-[1.2]">
             Fyntl Ai :
           </span>
           <span className="text-global-2">Your AI Accounting Assistant</span>
@@ -284,12 +262,17 @@ const Home = () => {
 
         {/* AI Chat Interface */}
         <div className="relative w-full md:w-[742px]">
-          {/* 24x7 Assistance Badge */}
-          <div className="absolute top-0 left-4 z-10 bg-global-9 border border-gray-300 rounded-[19px] px-3 py-1 md:px-4 md:py-2">
-            <span className="text-[14px] md:text-[18px] font-satoshi font-medium leading-[1.4] md:leading-[25px] text-global-5">
+          
+          {/* 24x7 Assistance Badge — Figma version */}
+          <div className="w-52 h-10 px-2.5 py-[5px] absolute bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-stone-300 inline-flex justify-center items-center gap-2.5">
+          <div className="w-6 h-6 relative overflow-hidden">
+              <div className="w-4 h-4 left-[4px] top-[4px] absolute bg-indigo-800" />
+            </div>
+            <div className="justify-start text-stone-500 text-lg font-medium font-['Satoshi']">
               24 x 7 Assistance
-            </span>
+            </div>
           </div>
+
 
           {/* Chat Header */}
           <div className="bg-global-9 border-b-2 border-gray-200 rounded-t-[20px] p-4 md:p-6 mt-8">
