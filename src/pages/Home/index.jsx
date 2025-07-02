@@ -158,92 +158,66 @@ const Home = () => {
           </div>
 
           {/* Financial Cards */}
-          <div className="absolute top-40 left-6 flex flex-col space-y-4 z-20">
-            {/* Financials Card */}
-            <div className="w-full md:w-[406px] md:h-[130px] px-7 py-6 bg-white rounded-[10px] shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] outline outline-1 outline-offset-[-1px] outline-neutral-200 flex flex-col justify-between">
-              <div className="flex justify-between items-end">
-                <div className="flex justify-start items-center gap-1.5">
-                  <div className="justify-start text-red-950 text-lg font-medium font-['Satoshi']">
-                    Financials
-                  </div>
-                  <div className="w-5 h-5 px-2.5 py-[5px] rounded-[30px] outline outline-2 outline-offset-[-2px] outline-stone-300 flex justify-center items-center gap-2.5">
-                    <div className="justify-start text-stone-300 text-base font-bold font-['Satoshi']">
-                      i
-                    </div>
-                  </div>
-                </div>
-                <div className="w-28 h-7 px-2.5 py-[5px] bg-green-100 rounded-[20px] flex justify-center items-center gap-2.5">
-                  <div className="justify-start text-stone-500 text-lg font-medium font-['Satoshi']">
-                    On Track
-                  </div>
-                </div>
-              </div>
-              <div className="flex justify-start items-center gap-2.5">
-                <div className="w-14 flex flex-col justify-center items-center gap-2">
-                  <div className="w-14 h-14 px-[5px] py-[3px] bg-indigo-100 rounded-[5px] flex justify-center items-center gap-2.5 overflow-hidden">
-                    <img
-                      src="/images/img_frame_1116606801.svg"
-                      alt="Financial chart"
-                      className="w-6 h-6"
-                    />
-                  </div>
-                </div>
-                <div className="w-28 flex flex-col justify-start items-start gap-1.5">
-                  <div className="text-red-950 text-lg font-medium font-['Satoshi']">
-                    $234,567.87
-                  </div>
-                  <div className="text-stone-500 text-lg font-medium font-['Satoshi']">
-                    Net Income
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Financial Cards */}
+<div className="absolute top-40 left-6 flex flex-col space-y-4 z-20 w-full max-w-[384px]">
+  {/* Financials Card */}
+  <div className="w-full px-7 py-2.5 bg-white rounded-[10px] shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] outline outline-1 outline-neutral-200 flex flex-col gap-5">
+    {/* Header Row */}
+    <div className="flex justify-between items-end">
+      <div className="flex items-center gap-1.5">
+        <span className="text-red-950 text-lg font-medium font-['Satoshi']">Financials</span>
+        <div className="w-5 h-5 rounded-full outline outline-2 outline-stone-300 flex items-center justify-center">
+          <span className="text-stone-300 text-base font-bold font-['Satoshi']">i</span>
+        </div>
+      </div>
+      <div className="px-2.5 py-[5px] bg-green-100 rounded-[20px] flex items-center justify-center">
+        <span className="text-stone-500 text-lg font-medium font-['Satoshi']">On Track</span>
+      </div>
+    </div>
 
-            <div className="w-96 px-7 py-2.5 bg-white rounded-[10px] shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] outline outline-1 outline-offset-[-1px] outline-neutral-200 flex flex-col gap-5">
-              {/* Top row: Title + Info + Arrow + % */}
-              <div className="w-full flex justify-between items-center">
-                {/* Title and "i" */}
-                <div className="flex items-center gap-1.5">
-                  <span className="text-red-950 text-lg font-satoshi font-medium">Sales</span>
-                  <div className="w-5 h-5 rounded-full outline outline-2 outline-offset-[-2px] outline-stone-300 flex items-center justify-center">
-                    <span className="text-stone-300 text-base font-satoshi font-bold">i</span>
-                  </div>
-                </div>
+    {/* Bottom Row */}
+    <div className="flex items-center gap-2.5">
+      <div className="w-14 h-14 px-[5px] py-[3px] bg-indigo-100 rounded-[5px] flex items-center justify-center overflow-hidden">
+        <img src="/images/img_frame_1116606801.svg" alt="Financial chart" className="w-6 h-6" />
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <span className="text-red-950 text-lg font-medium font-['Satoshi']">$234,567.87</span>
+        <span className="text-stone-500 text-lg font-medium font-['Satoshi']">Net Income</span>
+      </div>
+    </div>
+  </div>
 
-                {/* Growth Arrow and +% */}
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-violet-100 rounded-full flex items-center justify-center rotate-[-45deg]">
-                    <img
-                      src="/images/img_makiarrow.svg"
-                      alt="Growth arrow"
-                      className="w-4 h-4 rotate-[45deg]" // Un-rotate icon inside
-                    />
-                  </div>
-                  <span className="text-indigo-800 text-lg font-satoshi font-medium">+18%</span>
-                </div>
-              </div>
+  {/* Sales Card */}
+  <div className="w-full px-7 py-2.5 bg-white rounded-[10px] shadow-[0px_4px_6px_0px_rgba(0,0,0,0.10)] outline outline-1 outline-neutral-200 flex flex-col gap-5">
+    {/* Header Row */}
+    <div className="flex justify-between items-center">
+      <div className="flex items-center gap-1.5">
+        <span className="text-red-950 text-lg font-medium font-['Satoshi']">Sales</span>
+        <div className="w-5 h-5 rounded-full outline outline-2 outline-stone-300 flex items-center justify-center">
+          <span className="text-stone-300 text-base font-bold font-['Satoshi']">i</span>
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <div className="w-8 h-8 bg-violet-100 rounded-full flex items-center justify-center rotate-[-45deg]">
+          <img src="/images/img_makiarrow.svg" alt="Growth arrow" className="w-4 h-4 rotate-[45deg]" />
+        </div>
+        <span className="text-indigo-800 text-lg font-medium font-['Satoshi']">+18%</span>
+      </div>
+    </div>
 
-              {/* Revenue Section */}
-              <div className="flex items-center gap-3">
-                {/* Image Box */}
-                <div className="w-14 h-14 bg-indigo-100 rounded-[5px] flex items-center justify-center">
-                  <img
-                    src="/images/img_frame_1116606801_blue_50.svg"
-                    alt="Sales chart"
-                    className="w-8 h-8" // Bigger image size
-                  />
-                </div>
+    {/* Bottom Row */}
+    <div className="flex items-center gap-2.5">
+      <div className="w-14 h-14 bg-indigo-100 rounded-[5px] flex items-center justify-center">
+        <img src="/images/img_frame_1116606801_blue_50.svg" alt="Sales chart" className="w-8 h-8" />
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <span className="text-red-950 text-lg font-medium font-['Satoshi']">848</span>
+        <span className="text-stone-500 text-lg font-medium font-['Satoshi']">Projected Revenue</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-                {/* Revenue Text */}
-                <div className="flex flex-col gap-1">
-                  <span className="text-red-950 text-lg font-satoshi font-medium">848</span>
-                  <span className="text-stone-500 text-lg font-satoshi font-medium">
-                    Projected Revenue
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
 
           {/* AI Powered Badge */}
           <div className="absolute bottom-0 right-0 bg-global-9 border border-gray-300 rounded-[19px] px-3 py-1 md:px-4 md:py-2">
