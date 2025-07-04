@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../../components/common/Header';
 import Button from '../../components/ui/Button';
+import EmailDisplayComponent from '../../components/ui/EmailDisplayComponent';
 
 const Home = () => {
   const [chatInput, setChatInput] = useState('');
@@ -220,16 +221,27 @@ const Home = () => {
       </div>
 
       {/* AI Assistant */}
-      <div className="flex flex-col md:flex-row md:justify-end px-4 md:px-8 mb-24 gap-6">
-        <div className="max-w-[750px] w-full relative">
-          
-          {/* 24x7 Badge */}
-          <div className="absolute -top-8 left-1/2 md:left-auto md:right-6 transform md:translate-x-0 -translate-x-1/2 bg-white border border-gray-300 rounded-full px-6 py-2 text-gray-800 text-sm shadow">
+      <div className="flex flex-col items-center w-full px-4 md:px-8 mb-24 gap-6">
+        {/* Username/Email Input Placeholder (centered) */}
+        <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-6 mt-12 mb-8 flex flex-col items-center justify-center min-h-[120px] w-full max-w-[750px]">
+          <span className="text-gray-400">[Username/Email Input Component Here]</span>
+        </div>
+
+        {/* Email Display Component (centered below input) */}
+        <div className="w-full max-w-[750px]">
+          <EmailDisplayComponent />
+        </div>
+
+        {/* 24x7 Badge (moved below, above chat card) */}
+        <div className="w-full max-w-[750px] flex justify-center">
+          <div className="bg-white border border-gray-300 rounded-full px-6 py-2 text-gray-800 text-sm shadow mb-2">
             24 x 7 Assistance
           </div>
+        </div>
 
-          {/* Chat Card */}
-          <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-6 mt-12">
+        {/* Chat Card (centered) */}
+        <div className="w-full max-w-[750px]">
+          <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-6">
             <div className="flex items-center mb-4">
               <div className="w-[42px] h-[48px] bg-blue-700 rounded-md flex items-center justify-center mr-4">
                 <img src="/images/img_vector_white_a700.svg" alt="Fyntl AI" className="w-5 h-5" />
