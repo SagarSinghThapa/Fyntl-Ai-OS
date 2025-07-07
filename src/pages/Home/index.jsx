@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <div className="flex flex-col w-full min-h-screen bg-global-9">
       <Header />
-
+    
       {/* Main Content */}
       <div className="flex flex-col md:flex-row w-full px-4 md:px-8 py-16 md:py-24 justify-center gap-12">
         
@@ -222,10 +222,7 @@ const Home = () => {
 
       {/* AI Assistant */}
       <div className="flex flex-col items-center w-full px-4 md:px-8 mb-24 gap-6">
-        {/* Username/Email Input Placeholder (centered) */}
-        <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-6 mt-12 mb-8 flex flex-col items-center justify-center min-h-[120px] w-full max-w-[750px]">
-          <span className="text-gray-400">[Username/Email Input Component Here]</span>
-        </div>
+
 
         {/* Email Display Component (centered below input) */}
         <div className="w-full max-w-[750px]">
