@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 600px; }
+        input, button { padding: 10px; margin: 5px; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; }
+        .emails { margin-top: 20px; }
+        .email-item { background: #f8f9fa; padding: 10px; margin: 5px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Email Submission Test</h2>
+        
+        <div>
+            <input type="email" id="emailInput" placeholder="Enter your email" required>
+            <button onclick="submitEmail()">Submit Email</button>
+        </div>
+        
+        <div>
+            <button onclick="fetchEmails()">Fetch All Emails</button>
+        </div>
+        
+        <div id="emails" class="emails"></div>
+    </div>
+
+    <script>
+        async function submitEmail() {
+            const email = document.getElementById('emailInput').value;
+            
+            if (!email) {
+                alert('Please enter an email');
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://localhost:3001/api/emails', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert('Email submitted successfully!');
+                    document.getElementById('emailInput').value = '';
+                    fetchEmails(); // Refresh the list
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                alert('Error submitting email');
+            }
+        }
+        
+        async function fetchEmails() {
+            try {
+                const response = await fetch('http://localhost:3001/api/emails');
+                const emails = await response.json();
+                
+                const emailsDiv = document.getElementById('emails');
+                
+                if (emails.length === 0) {
+                    emailsDiv.innerHTML = '<p>No emails found</p>';
+                    return;
+                }
+                
+                emailsDiv.innerHTML = '<h3>All Emails:</h3>' + 
+                    emails.map(email => 
+                        `<div class="email-item">
+                            <strong>${email.email}</strong> 
+                            <small>(${new Date(email.submittedAt).toLocaleString()})</small>
+                        </div>`
+                    ).join('');
+                    
+            } catch (error) {
+                alert('Error fetching emails');
+            }
+        }
+    </script>
+</body>
+</html>
