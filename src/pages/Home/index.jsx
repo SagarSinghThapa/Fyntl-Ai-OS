@@ -257,10 +257,61 @@ function ChatUnavailable() {
   );
 }
 
+// === NEW COMPONENT: QueryInput ===
+const QueryInput = ({ onSubmit }) => {
+  const [query, setQuery] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!query.trim()) return;
+    onSubmit(query);
+    setQuery('');
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="relative mt-6 mb-4">
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Ask anything..."
+        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+      />
+      <button
+        type="submit"
+        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-600 hover:text-blue-800 transition"
+      >
+        {/* Circle with Right Arrow */}
+        <div className="flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">
+          →
+        </div>
+      </button>
+    </form>
+  );
+};
+
 const Home = () => {
+  const [isBlurred, setIsBlurred] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [loadingResponse, setLoadingResponse] = useState(false);
   const [chatInput, setChatInput] = useState('');
   const handleGetStarted = () => console.log('Get Started clicked');
   const handleChatSubmit = (e) => { e.preventDefault(); if (chatInput.trim()) { console.log('Chat message:', chatInput); setChatInput(''); } };
+
+  // Handle query submission
+   const handleQuerySubmit = (query) => {
+  console.log('Query submitted:', query);
+
+  setIsBlurred(true);
+  setLoadingResponse(true); // Show loading message
+  setShowModal(false);
+
+  // Show loading for 1.2s, then show modal
+  setTimeout(() => {
+    setLoadingResponse(false); // Hide loading message
+    setShowModal(true);        // Show sign-in/sign-up modal
+  }, 1200);
+};
 
   const businessFeatures = [
     { icon: '/images/img_vector.svg', label: 'Invoicing' },
@@ -359,21 +410,24 @@ const Home = () => {
 
           <div className="absolute inset-0 bg-scan animate-scanLines opacity-10 pointer-events-none z-0" />
 
-          {/* Features Grid */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 mb-8">
-            {businessFeatures.map((feature, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <div className="w-[40px] h-[40px] md:w-[60px] md:h-[60px] bg-global-3 rounded-[5px] flex items-center justify-center mb-2">
-                  <img src={feature.icon} alt={feature.label} className="w-5 h-5 md:w-6 md:h-6" />
-                </div>
-                <span className="text-[10px] md:text-[12px] font-satoshi font-medium text-global-5 text-center">
-                  {feature.label}
-                </span>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 mb-8">
+          {businessFeatures.map((feature, index) => (
+            <div key={index} className="flex flex-col items-center">
+              <div className="w-[40px] h-[40px] md:w-[60px] md:h-[60px] bg-global-3 rounded-[5px] flex items-center justify-center mb-2">
+                <img src={feature.icon} alt={feature.label} className="w-5 h-5 md:w-6 md:h-6" />
               </div>
-            ))}
-          </div>
+              <span className="text-[10px] md:text-[12px] font-satoshi font-medium text-global-5 text-center">
+                {feature.label}
+              </span>
+            </div>
+          ))}
         </div>
 
+        {/* Place QueryInput here so it appears below the grid */}
+        <QueryInput onSubmit={handleQuerySubmit} />
+      </div>
         {/* Right Section */}
         <div className="relative flex flex-col w-full max-w-[760px]">
           
@@ -505,11 +559,115 @@ const Home = () => {
     </div>
     <ChatUnavailable />
   </div>
+          {/* === BLURRED BACKGROUND (when active) === */}
+{isBlurred && (
+  <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm transition-opacity duration-300 z-50"></div>
+)}
+
+        {/* === "RESPONSE IS READY" SKELETON (running line) === */}
+{loadingResponse && (
+  <div className="fixed top-0 left-0 w-full flex flex-col items-center z-50 pointer-events-none">
+    <div className="bg-blue-700 text-white px-6 py-3 rounded-b-lg shadow-lg mt-0 w-full flex flex-col items-center">
+      <p className="text-base font-semibold mb-2">Your content is generated</p>
+      <div className="w-80 h-2 bg-gray-300 rounded overflow-hidden mb-4">
+        <div
+          className="h-full bg-blue-500"
+          style={{
+            width: '70%',
+            animation: 'loadingBar 1.8s ease-in-out infinite alternate',
+          }}
+        ></div>
+      </div>
+     
+    
+    </div>
+  </div>
+)}
+
+
+
+{showModal && (
+  <div className="fixed top-0 left-0 w-full flex flex-col items-center z-40 pointer-events-none">
+    {/* Skeleton lines in background */}
+    <div className="mt-20 w-full max-w-6xl px-8 flex flex-col items-center">
+      {Array.from({ length: 6 }).map((_, lineIdx) => (
+        <div key={lineIdx} className="flex mb-3 justify-center w-full gap-0">
+          {Array.from({ length: 14 }).map((_, wordIdx) => (
+            <span
+              key={wordIdx}
+              className="bg-gray-300 rounded h-6 flex-1 inline-block"
+              style={{
+                opacity: 0,
+                animation: `fadeInWord 0.4s ease forwards`,
+                animationDelay: `${0.2 + lineIdx * 0.3 + wordIdx * 0.08}s`
+              }}
+            ></span>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+{showModal && (
+  <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full text-center relative">
+      {/* Close Button */}
+      <button
+        className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl font-bold focus:outline-none"
+        onClick={() => {
+          setShowModal(false);
+          setIsBlurred(false);
+          setLoadingResponse(false);
+        }}
+        aria-label="Close"
+      >
+        &times;
+      </button>
+      <h2 className="text-2xl font-bold mb-4">Unlock AI Features</h2>
+      <p className="mb-6 text-gray-600">Sign in or create an account to view your AI response.</p>
+      <button className="w-full py-3 mb-4 bg-blue-600 text-white rounded font-semibold">Sign In</button>
+      <button className="w-full py-3 bg-purple-600 text-white rounded font-semibold">Sign Up</button>
+    </div>
+  </div>
+)}
+                {/* === GLOBAL ANIMATIONS (required for skeleton & modal) === */}
+        <style>
+          {`
+            @keyframes loadingBar {
+              0% {
+                transform: scaleX(0.1);
+                transform-origin: left;
+              }
+              100% {
+                transform: scaleX(1);
+                transform-origin: left;
+              }
+            }
+
+            @keyframes fadeIn {
+              from {
+                opacity: 0;
+                transform: translateY(-10px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+
+            .animate-fadeIn {
+              animation: fadeIn 0.3s ease-out;
+            }
+          `}
+        </style>
 </div>
       </div>
 
     </div>
+    
   );
+  
 };
 
 export default Home;
