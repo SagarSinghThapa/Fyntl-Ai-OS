@@ -3,6 +3,260 @@ import Header from '../../components/common/Header';
 import Button from '../../components/ui/Button';
 import EmailDisplayComponent from '../../components/ui/EmailDisplayComponent';
 
+
+
+// === NEW COMPONENT: ChatUnavailable ===
+const aiTasks = [
+  "Summarise the invoices report",
+  "Search a specific invoice by GST",
+  "Provide management tips",
+  "Generate sales summaries",
+  "Track payment statuses",
+  "Suggest cost-saving measures",
+  "Analyze customer trends",
+  "Export reports to Excel/PDF",
+  "Set invoice reminders",
+  "Answer FAQs about invoicing"
+];
+
+// function ChatUnavailable() {
+//   const [input, setInput] = useState('');
+//   const [loading, setLoading] = useState(false);
+//   const [showUnavailable, setShowUnavailable] = useState(false);
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     if (!input.trim()) return;
+//     setLoading(true);
+//     setShowUnavailable(false);
+//     setTimeout(() => {
+//       setLoading(false);
+//       setShowUnavailable(true);
+//     }, 1200); // Simulate a 1.2 second loading time
+//   };
+
+//   return (
+//     <div>
+//       {/* Response Area (Loading or Unavailable Message) */}
+// {/* Response Area */}
+// <div className="h-[80px] bg-gray-100 rounded mb-4 flex items-center justify-center relative overflow-hidden">
+//   {loading && (
+//     <span
+//       className="flex items-center justify-center transition-all duration-300 ease-in-out"
+//       style={{
+//         transform: 'translateX(0)',
+//         opacity: 1
+//       }}
+//     >
+//       {/* Loading Spinner */}
+//       <span className="animate-spin inline-block w-6 h-6 border-4 border-blue-400 border-t-transparent rounded-full"></span>
+//     </span>
+//   )}
+//   {!loading && showUnavailable && (
+//     <div
+//       className="flex items-center justify-center text-green-600 text-2xl"
+//       style={{
+//         transform: 'translateX(-10px)', // Slight left movement
+//         opacity: 1,
+//         transition: 'all 0.4s ease-out'
+//       }}
+//     >
+//       {/* Green Checkmark */}
+//       <span className="mr-2">✔️</span>
+//       {/* Unavailable Message */}
+//       <span className="text-gray-800 text-base">I am currently unavailable.</span>
+//     </div>
+//   )}
+// </div>
+
+//       {/* Input Form */}
+//       <form onSubmit={handleSubmit}>
+//         <input
+//           type="text"
+//           value={input}
+//           onChange={(e) => setInput(e.target.value)}
+//           placeholder="Ask anything..."
+//           className="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none"
+//           disabled={loading || showUnavailable} // Disable input during loading or after response
+//         />
+//       </form>
+
+//       {/* Task List (Appears only when AI is unavailable) */}
+//       {showUnavailable && (
+//         <div className="mt-4">
+//           <div className="font-semibold text-gray-700 mb-2">Here are some tasks I can help with when I'm available:</div>
+//           <ul className="list-disc pl-5 space-y-1">
+//             {aiTasks.map((task, idx) => (
+//               <li
+//                 key={task}
+//                 style={{
+//                   opacity: 0,
+//                   animation: `fadeIn 0.5s ease forwards`,
+//                   animationDelay: `${0.3 + idx * 0.15}s`
+//                 }}
+//                 className="text-gray-600"
+//               >
+//                 {task}
+//               </li>
+//             ))}
+//           </ul>
+//           {/* Inline CSS for the fade-in animation */}
+//           <style>
+//             {`
+//               @keyframes fadeIn {
+//                 to { opacity: 1; }
+//               }
+//             `}
+//           </style>
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
+// === END OF NEW COMPONENT ===
+function ChatUnavailable() {
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [showMessage, setShowMessage] = useState(false); // Controls message visibility
+  const [showTaskList, setShowTaskList] = useState(false); // Controls task list visibility
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    setLoading(true);
+    setShowMessage(false);
+    setShowTaskList(false);
+
+    // Simulate loading
+    setTimeout(() => {
+      setLoading(false);
+      setShowMessage(true);
+
+      // Show task list only after message animation completes
+      setTimeout(() => {
+        setShowTaskList(true);
+      }, 1000); // Wait ~1s (slightly longer than the last word's animation delay)
+    }, 1200);
+  };
+
+  const messageWords = "I am currently unavailable.".split(' ');
+
+  return (
+    <div>
+      {/* === Response Box === */}
+      <div className="h-[80px] bg-gray-100 rounded mb-4 flex items-center px-4 relative overflow-hidden">
+        {loading && (
+          <span
+            className="flex items-center text-blue-500"
+            style={{ transform: 'translateX(0)', opacity: 1 }}
+          >
+            <span className="animate-spin inline-block w-6 h-6 border-4 border-blue-400 border-t-transparent rounded-full"></span>
+          </span>
+        )}
+
+        {!loading && showMessage && (
+          <div className="flex items-center">
+            {/* Green Checkmark */}
+            <span className="text-green-600 text-xl mr-2">✔️</span>
+            {/* Word-by-word message */}
+            <span className="text-gray-800 text-base flex">
+              {messageWords.map((word, idx) => (
+                <span
+                  key={idx}
+                  style={{
+                    opacity: 0,
+                    animation: `fadeInWord 0.4s ease forwards`,
+                    animationDelay: `${0.1 + idx * 0.1}s`
+                  }}
+                  className="inline-block mr-1"
+                >
+                  {word}
+                </span>
+              ))}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* === Input Field === */}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Ask anything..."
+          className="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none"
+          disabled={loading || showMessage}
+        />
+      </form>
+
+      {/* === Task List Section (Skeleton → Message → Task List) === */}
+      <div className="mt-4">
+        {loading ? (
+          /* === Skeleton while loading === */
+          <div className="space-y-3">
+            <div className="h-5 bg-gray-200 rounded w-48"></div>
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div
+                key={idx}
+                className="h-4 bg-gray-200 rounded w-full"
+                style={{ animation: 'pulse 1.5s ease-in-out infinite', animationDelay: `${idx * 0.1}s` }}
+              ></div>
+            ))}
+          </div>
+        ) : showMessage && !showTaskList ? (
+          /* === Still showing skeleton until task list is ready === */
+          <div className="space-y-3 opacity-80">
+            <div className="h-5 bg-gray-200 rounded w-48"></div>
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div key={idx} className="h-4 bg-gray-200 rounded w-full"></div>
+            ))}
+          </div>
+        ) : showTaskList ? (
+          /* === Final: Task List with fade-in === */
+          <>
+            <div className="font-semibold text-gray-700 mb-2">
+              Here are some tasks I can help with when I'm available:
+            </div>
+            <ul className="list-disc pl-5 space-y-1">
+              {aiTasks.map((task, idx) => (
+                <li
+                  key={task}
+                  style={{
+                    opacity: 0,
+                    animation: `fadeInItem 0.5s ease forwards`,
+                    animationDelay: `${0.2 + idx * 0.15}s`
+                  }}
+                  className="text-gray-600"
+                >
+                  {task}
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
+      </div>
+
+      {/* === Inline CSS for Animations === */}
+      <style>
+        {`
+          @keyframes fadeInWord {
+            to { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes fadeInItem {
+            to { opacity: 1; }
+          }
+          @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+          }
+        `}
+      </style>
+    </div>
+  );
+}
+
 const Home = () => {
   const [chatInput, setChatInput] = useState('');
   const handleGetStarted = () => console.log('Get Started clicked');
@@ -236,27 +490,22 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Chat Card (centered) */}
-        <div className="w-full max-w-[750px]">
-          <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-6">
-            <div className="flex items-center mb-4">
-              <div className="w-[42px] h-[48px] bg-blue-700 rounded-md flex items-center justify-center mr-4">
-                <img src="/images/img_vector_white_a700.svg" alt="Fyntl AI" className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="font-bold text-gray-800">Fyntl AI</p>
-                <p className="text-gray-500 text-sm">Online Now</p>
-              </div>
-            </div>
-            <div className="h-[80px] bg-gray-100 rounded mb-4"></div>
-            <form onSubmit={handleChatSubmit}>
-              <input 
-                type="text" value={chatInput} onChange={(e) => setChatInput(e.target.value)} placeholder="Ask anything..." 
-                className="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none"
-              />
-            </form>
-          </div>
-        </div>
+       
+{/* Chat Card (centered) */}
+<div className="w-full max-w-[750px]">
+  <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-6">
+    <div className="flex items-center mb-4">
+      <div className="w-[42px] h-[48px] bg-blue-700 rounded-md flex items-center justify-center mr-4">
+        <img src="/images/img_vector_white_a700.svg" alt="Fyntl AI" className="w-5 h-5" />
+      </div>
+      <div>
+        <p className="font-bold text-gray-800">Fyntl AI</p>
+        <p className="text-gray-500 text-sm">Online Now</p>
+      </div>
+    </div>
+    <ChatUnavailable />
+  </div>
+</div>
       </div>
 
     </div>
