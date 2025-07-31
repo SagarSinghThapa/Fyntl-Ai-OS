@@ -295,23 +295,32 @@ const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const [loadingResponse, setLoadingResponse] = useState(false);
   const [chatInput, setChatInput] = useState('');
+  const [showReadyText, setShowReadyText] = useState(false);
+  const [skeletonDone, setSkeletonDone] = useState(false);
   const handleGetStarted = () => console.log('Get Started clicked');
   const handleChatSubmit = (e) => { e.preventDefault(); if (chatInput.trim()) { console.log('Chat message:', chatInput); setChatInput(''); } };
 
   // Handle query submission
-   const handleQuerySubmit = (query) => {
-  console.log('Query submitted:', query);
-
+const handleQuerySubmit = (query) => {
   setIsBlurred(true);
-  setLoadingResponse(true); // Show loading message
+  setLoadingResponse(true);
   setShowModal(false);
+  setSkeletonDone(false);
 
-  // Show loading for 1.2s, then show modal
-  setTimeout(() => {
-    setLoadingResponse(false); // Hide loading message
-    setShowModal(true);        // Show sign-in/sign-up modal
-  }, 1200);
+  // Calculate skeleton animation duration (e.g. 6 lines * 14 words * 0.08s + base delay)
+  const skeletonDuration = 0.2 + 6 * 0.3 + 14 * 0.08; // ~2.98s
+ setTimeout(() => {
+  setSkeletonDone(true);
+  setTimeout(() => setShowReadyText(true), 200); // 200ms delay for fade effect
+  setShowModal(true); // Show modal after skeleton/tick
+}, skeletonDuration * 1000);
+    // Show loading for 1.2s, then show modal
+  // setTimeout(() => {
+  //   setLoadingResponse(false); // Hide loading message
+  //   setShowModal(true);        // Show sign-in/sign-up modal
+  // }, 1200);
 };
+
 
   const businessFeatures = [
     { icon: '/images/img_vector.svg', label: 'Invoicing' },
@@ -566,48 +575,71 @@ const Home = () => {
 
         {/* === "RESPONSE IS READY" SKELETON (running line) === */}
 {loadingResponse && (
-  <div className="fixed top-0 left-0 w-full flex flex-col items-center z-50 pointer-events-none">
-    <div className="bg-blue-700 text-white px-6 py-3 rounded-b-lg shadow-lg mt-0 w-full flex flex-col items-center">
-      <p className="text-base font-semibold mb-2">Your content is generated</p>
-      <div className="w-80 h-2 bg-gray-300 rounded overflow-hidden mb-4">
-        <div
-          className="h-full bg-blue-500"
-          style={{
-            width: '70%',
-            animation: 'loadingBar 1.8s ease-in-out infinite alternate',
-          }}
-        ></div>
+  <div className="fixed inset-0 w-full flex flex-col items-center justify-center z-50 pointer-events-none">
+    {/* Blue bar */}
+    <div className="flex justify-center w-full">
+      <div className="bg-blue-700 text-white px-6 py-3 rounded-b-lg shadow-lg w-[70%] max-w-4xl flex flex-col items-center">
+        <div className="flex items-center justify-center mb-2">
+          {/* Spinner or Tick */}
+          {!skeletonDone ? (
+            <span className="flex items-center mr-2">
+              <span className="animate-spin inline-block w-6 h-6 border-4 border-white border-t-transparent rounded-full"></span>
+            </span>
+          ) : (
+            <span className="text-green-400 text-2xl mr-2">✔️</span>
+          )}
+          {/* Animated Text */}
+          <span className="relative inline-block min-h-[24px]">
+            {!showReadyText ? (
+              <span
+                className="transition-opacity duration-200 opacity-100"
+                style={{ transition: 'opacity 0.2s' }}
+              >
+                Your response is generating
+              </span>
+            ) : (
+              <span
+                className="transition-opacity duration-200 opacity-100 animate-fadeIn"
+                style={{ transition: 'opacity 0.2s' }}
+              >
+                Your response is ready to view
+              </span>
+            )}
+          </span>
+        </div>
       </div>
-     
-    
     </div>
-  </div>
-)}
 
-
-
-{showModal && (
-  <div className="fixed top-0 left-0 w-full flex flex-col items-center z-40 pointer-events-none">
-    {/* Skeleton lines in background */}
-    <div className="mt-20 w-full max-w-6xl px-8 flex flex-col items-center">
-      {Array.from({ length: 6 }).map((_, lineIdx) => (
-        <div key={lineIdx} className="flex mb-3 justify-center w-full gap-0">
-          {Array.from({ length: 14 }).map((_, wordIdx) => (
-            <span
-              key={wordIdx}
-              className="bg-gray-300 rounded h-6 flex-1 inline-block"
-              style={{
-                opacity: 0,
-                animation: `fadeInWord 0.4s ease forwards`,
-                animationDelay: `${0.2 + lineIdx * 0.3 + wordIdx * 0.08}s`
-              }}
-            ></span>
+    {/* White overlay with faded, unreadable skeleton "sentences" */}
+    <div className="flex justify-center w-full">
+      <div className="bg-white w-[70%] max-w-4xl h-[80vh] rounded-b-2xl shadow-lg flex flex-col items-center pointer-events-auto" style={{ marginTop: '-8px' }}>
+        <div className="w-full max-w-3xl px-8 flex flex-col items-center h-full justify-between py-10">
+          {Array.from({ length: 10 }).map((_, lineIdx) => (
+            <div key={lineIdx} className="flex mb-3 w-full gap-2">
+              {Array.from({ length: Math.floor(Math.random() * 7) + 7 }).map((_, wordIdx) => (
+                <span
+                  key={wordIdx}
+                  className="bg-gray-300 opacity-20 rounded-full inline-block"
+                  style={{
+                    width: `${Math.floor(Math.random() * 40) + 40}px`,
+                    height: '18px',
+                    marginRight: '8px',
+                    opacity: 0,
+                    animation: `fadeInWord 0.4s ease forwards`,
+                    animationDelay: `${0.2 + lineIdx * 0.2 + wordIdx * 0.06}s`
+                  }}
+                ></span>
+              ))}
+            </div>
           ))}
         </div>
-      ))}
+      </div>
     </div>
   </div>
 )}
+
+
+
 
 {showModal && (
   <div className="fixed inset-0 flex items-center justify-center z-50">
